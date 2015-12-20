@@ -1,11 +1,13 @@
 package devember;
 
+import devember.pageobjects.BookingFlow;
+import devember.pageobjects.TopMenu;
 import org.openqa.selenium.WebDriver;
 
 public class SF {
     WebDriver driver;
-    TopMenu topMenu;
-    BookingFlow bookingFlow;
+    public TopMenu topMenu;
+    public BookingFlow bookingFlow;
 
     public SF(WebDriver driver){
         this.driver = driver;

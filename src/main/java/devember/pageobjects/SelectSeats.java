@@ -1,11 +1,11 @@
-package devember;
+package devember.pageobjects;
 
 import org.openqa.selenium.WebDriver;
 
-public class BookingFlow {
+public class SelectSeats {
     WebDriver driver;
 
-    public BookingFlow(WebDriver driver){
+    public SelectSeats(WebDriver driver){
         this.driver = driver;
     }
 }
