@@ -2,3 +2,5 @@
 .idea/
 
 target/
+
+.idea/compiler.xml
