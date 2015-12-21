@@ -9,7 +9,9 @@ public class TestSF extends BaseTestClass {
     @BeforeTest
     public void setUp() throws InterruptedException {
         driver.get("https://www.sf.se/");
+        Thread.sleep(15000); // TODO: handle popover
         sf.topMenu.SelectCity("Malmö"); // This step would not be needed if showing selections were not hardcoded
+        Thread.sleep(10000); // TODO: handle shitty popover
     }
 
     @Test
@@ -17,11 +19,11 @@ public class TestSF extends BaseTestClass {
         sf.topMenu.Tickets();
         Thread.sleep(5000); //TODO: Wait for page reload
         sf.bookingFlow.selectShow.SelectDay("tomorrow"); // Should be enumeration instead of string
-//        sf.bookingFlow.selectShow.SelectCinema("Royal"); // Should have option to select any available option
-//        sf.bookingFlow.selectShow.SelectMovie("Star Wars: The Force Awakens"); // Should have option to select any available option
-//        sf.bookingFlow.selectShow.SelectShowing("21:30"); // Should have option to select any available option
-//
-//        sf.bookingFlow.selectSeats.NumberOfTickets(1);
+        sf.bookingFlow.selectShow.SelectCinema("Royal"); // Should have option to select any available option
+        sf.bookingFlow.selectShow.SelectFirstMovie("Star Wars"); // Should have option to select any available option
+        sf.bookingFlow.selectShow.SelectShowing("21:30"); // Should have option to select any available option
+
+        sf.bookingFlow.selectSeats.NumberOfAdults("1");
 //        sf.bookingFlow.selectSeats.SelectAnyAvailableSeat();
 //        sf.bookingFlow.selectSeats.ProceedToBuyOrReserve();
 //
@@ -31,10 +33,10 @@ public class TestSF extends BaseTestClass {
 //        Assert.assertEquals(sf.bookingFlow.buyOrReserve.GetSelectedCinema(), "Royal",
 //                "Selected cinema is seen in Purchase/Reserve step");
 //
-//        Assert.assertEquals(sf.bookingFlow.buyOrReserve.GetSelectedDay(), "tomorrow",
+//        Assert.assertTrue(sf.bookingFlow.buyOrReserve.GetSelectedDayAndTime().contains("Imorgon"),
 //                "Selected day is seen in Purchase/Reserve step");
 //
-//        Assert.assertEquals(sf.bookingFlow.buyOrReserve.GetSelectedShowing(), "21:30",
+//        Assert.assertEquals(sf.bookingFlow.buyOrReserve.GetSelectedDayAndTime().contains("21:30"),
 //                "Selected showing is seen in Purchase/Reserve step");
 
         // This test should continue beyond this step of the booking flow

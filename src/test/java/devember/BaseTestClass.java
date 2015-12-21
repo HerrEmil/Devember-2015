@@ -11,7 +11,7 @@ public class BaseTestClass {
 
     @AfterSuite
     public void tearDown() throws InterruptedException {
-        driver.close();
-        driver.quit();
+//        driver.close();
+//        driver.quit();
     }
 }
