@@ -44,7 +44,7 @@ public class SelectShow {
         driver.findElement(By.linkText(cinema)).click();
     }
 
-    public void SelectFirstMovie(String movie){
+    public void SelectFirstMovie(){
         String firstMovie = "ul#BookingList li:not(.displayNone)";
 
         WebDriverWait wait = new WebDriverWait(driver, 10);
