@@ -13,6 +13,10 @@ public class BuyOrReserve {
         this.driver = driver;
     }
 
+    public boolean IsAt(){
+        return driver.getCurrentUrl().equals("http://www.sf.se/biljetter/bokningsflodet/kop-och-reservera/");
+    }
+
     public String GetSelectedMovie(){
         return driver.findElement(By.cssSelector("#BookingRecieptMovieInfo > h2")).getText();
     }

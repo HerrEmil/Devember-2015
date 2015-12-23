@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -25,8 +26,11 @@ public class TopMenu {
 
         chooseCity.findElement(By.linkText(city)).click();
 
-        // TODO: This is filthy, replace with wait for page reload
-        Thread.sleep(5000);
+        wait.until(new ExpectedCondition<Boolean>() {
+            public Boolean apply(WebDriver driver) {
+                return driver.getCurrentUrl().contains("city=");
+            }
+        });
     }
 
     public void Tickets(){
@@ -39,5 +43,13 @@ public class TopMenu {
                 .click()
                 .build()
                 .perform();
+
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(new ExpectedCondition<Boolean>() {
+            public Boolean apply(WebDriver driver) {
+                return driver.getCurrentUrl().equals("http://www.sf.se/biljetter/bokningsflodet/valj-forestallning/");
+            }
+        });
+        // TODO: Since I'm waiting for the URL I maybe should just write sf.bookingFlow.GoTo() that driver.get() the URL
     }
 }

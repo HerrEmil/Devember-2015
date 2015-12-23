@@ -1,16 +1,15 @@
 package devember.pageobjects;
 
-import org.apache.commons.lang3.NotImplementedException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.List;
-
 public class SelectShow {
     WebDriver driver;
+    String selectedMovie = "";
+    String selectedShowing = "";
 
     public SelectShow(WebDriver driver){
         this.driver = driver;
@@ -36,6 +35,7 @@ public class SelectShow {
         }
     }
 
+    // TODO: Figure out if I can make a SelectCinema function that works with ads blocked
     public void SelectCinema(String cinema){
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.elementToBeClickable(By.id("BookingTheatreContainer")));
@@ -45,27 +45,30 @@ public class SelectShow {
     }
 
     public void SelectFirstMovie(){
-        String firstMovie = "ul#BookingList li:not(.displayNone)";
+        String firstMovieLI = "ul#BookingList li:not(.displayNone)";
 
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(firstMovie)));
-        driver.findElement(By.cssSelector(firstMovie)).findElement(By.cssSelector("div.mTitle")).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(firstMovieLI)));
+
+        selectedMovie = driver.findElement(By.cssSelector(firstMovieLI)).findElement(By.cssSelector(".concept-splash span")).getText();
+
+        driver.findElement(By.cssSelector(firstMovieLI)).findElement(By.cssSelector("div.mTitle")).click();
     }
 
-    public void SelectShowing(String time){
+    public String SelectedMovie(){
+        return selectedMovie;
+    }
+
+    public void SelectFirstShowing(){
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("div.cmil_time")));
 
-        // Get list of showings
-        List<WebElement> timeDivs = driver.findElements(By.cssSelector("div.cmil_time"));
+        WebElement timeDiv = driver.findElement(By.cssSelector("div.cmil_time"));
+        selectedShowing = timeDiv.getText();
+        timeDiv.findElement(By.xpath("..")).findElement(By.cssSelector("div.cmil_btn > a")).click();
+    }
 
-        // In list of showings, find row with matching time
-        for(WebElement timeDiv : timeDivs){
-            if (timeDiv.getText().contains(time)){
-                timeDiv.findElement(By.xpath("..")).findElement(By.cssSelector("div.cmil_btn > a")).click();
-                return;
-            }
-        }
-        System.out.println("Could not find showing"); // TODO: find suitable assertion
+    public String SelectedShowing() {
+        return selectedShowing;
     }
 }
