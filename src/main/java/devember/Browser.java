@@ -5,9 +5,12 @@ import net.lightbody.bmp.BrowserMobProxyServer;
 import net.lightbody.bmp.client.ClientUtil;
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.safari.SafariDriver;
 
 public class Browser {
     public WebDriver driver;
@@ -47,7 +50,13 @@ public class Browser {
 //        proxy.blacklistRequests(".*fusion\\.sf\\.se\\/scriptSF\\.js\\?ads=sf", 400);
         proxy.blacklistRequests(".*ads=sf", 400);
 
+        // If using Chrome, the seat picker defaults to a flash player
+        // We disable flash to fall back to HTML seat picker
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--disable-bundled-ppapi-flash");
+        capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+
         // start the browser up
-        driver = new FirefoxDriver(capabilities);
+        driver = new SafariDriver(capabilities);
     }
 }

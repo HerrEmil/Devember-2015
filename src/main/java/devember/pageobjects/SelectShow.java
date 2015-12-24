@@ -15,7 +15,11 @@ public class SelectShow {
         this.driver = driver;
     }
 
-    public void SelectDay(String day){
+    public void GoTo(){
+        driver.get("http://www.sf.se/biljetter/bokningsflodet/valj-forestallning/");
+    }
+
+    public void SelectDay(String day) throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.elementToBeClickable(By.id("BookingMenuDayContainer")));
         driver.findElement(By.id("BookingMenuDayContainer")).click();

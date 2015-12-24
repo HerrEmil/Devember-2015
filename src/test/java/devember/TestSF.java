@@ -8,6 +8,7 @@ public class TestSF extends BaseTestClass {
     @Test
     public void canGoThroughBookingFlowToPurchase() throws InterruptedException {
         sf.topMenu.Tickets();
+//        sf.bookingFlow.selectShow.GoTo();
         sf.bookingFlow.selectShow.SelectDay("tomorrow"); // TODO: Should be enumeration instead of string
         sf.bookingFlow.selectShow.SelectFirstMovie();
         sf.bookingFlow.selectShow.SelectFirstShowing();
