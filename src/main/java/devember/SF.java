@@ -22,7 +22,10 @@ public class SF {
     }
 
     public void dismissCookieNotice(){
-        if(!driver.findElements(By.id("CookiesAreBeingUsedInnerWrapper")).isEmpty()){
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        System.out.println(driver.findElement(By.id("CookiesAreBeingUsed")).getAttribute("style"));
+        if(driver.findElement(By.id("CookiesAreBeingUsed")).getAttribute("style").contains("display: block;")){
+            wait.until(ExpectedConditions.elementToBeClickable(By.id("CookiesAreBeingUsedInnerWrapper")));
             driver.findElement(By.id("CookiesAreBeingUsedInnerWrapper")).findElement(By.tagName("a")).click();
         }
     }
