@@ -8,14 +8,19 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class Browser {
     public WebDriver driver;
 
-    public Browser() {
+    public Browser() throws MalformedURLException {
         // start the proxy
         BrowserMobProxy proxy = new BrowserMobProxyServer();
         proxy.start(0);
@@ -56,7 +61,12 @@ public class Browser {
         options.addArguments("--disable-bundled-ppapi-flash");
         capabilities.setCapability(ChromeOptions.CAPABILITY, options);
 
+        FirefoxProfile profile = new FirefoxProfile();
+        profile.setPreference("plugin.state.flash", 0);
+        capabilities.setCapability(FirefoxDriver.PROFILE, profile);
+
         // start the browser up
-        driver = new SafariDriver(capabilities);
+        // driver = new RemoteWebDriver(new URL("http://localhost:9515"), capabilities);
+        driver = new FirefoxDriver(capabilities);
     }
 }
