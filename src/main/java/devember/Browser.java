@@ -29,8 +29,8 @@ public class Browser {
         Proxy seleniumProxy = ClientUtil.createSeleniumProxy(proxy);
 
         // configure proxy as a desired capability
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability(CapabilityType.PROXY, seleniumProxy);
+        DesiredCapabilities capabilities = DesiredCapabilities.edge();
+//        capabilities.setCapability(CapabilityType.PROXY, seleniumProxy);
 
         // Blocking these servers removes most ads, but not the popover (though its images are blocked)
         proxy.blacklistRequests(".*cdn.adnxs.com.*", 400);
@@ -65,8 +65,14 @@ public class Browser {
         profile.setPreference("plugin.state.flash", 0);
         capabilities.setCapability(FirefoxDriver.PROFILE, profile);
 
+        capabilities.setCapability("platform", "Windows 10");
+
+        String USERNAME = "HerrEmil";
+        String ACCESS_KEY = "PASTE ACCESS KEY HERE"; //TODO: put credentials in separate file and gitignore it
+        String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
+
         // start the browser up
-        // driver = new RemoteWebDriver(new URL("http://localhost:9515"), capabilities);
-        driver = new FirefoxDriver(capabilities);
+         driver = new RemoteWebDriver(new URL(URL), capabilities);
+//        driver = new FirefoxDriver(capabilities);
     }
 }
