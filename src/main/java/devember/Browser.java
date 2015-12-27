@@ -9,6 +9,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -71,8 +72,13 @@ public class Browser {
         String ACCESS_KEY = "PASTE ACCESS KEY HERE"; //TODO: put credentials in separate file and gitignore it
         String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
 
+        System.setProperty("webdriver.ie.driver", "C:\\WebDrivers\\IEDriverServer.exe");
+        driver = new InternetExplorerDriver(capabilities);
+
+//        System.setProperty("webdriver.chrome.driver", "C:\\WebDrivers\\chromedriver.exe");
+//        driver = new ChromeDriver(capabilities);
+
         // start the browser up
-         driver = new RemoteWebDriver(new URL(URL), capabilities);
-//        driver = new FirefoxDriver(capabilities);
+//         driver = new RemoteWebDriver(new URL(URL), capabilities);
     }
 }
