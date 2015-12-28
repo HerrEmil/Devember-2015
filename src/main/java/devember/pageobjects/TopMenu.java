@@ -1,5 +1,6 @@
 package devember.pageobjects;
 
+import devember.Utility;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -31,16 +32,25 @@ public class TopMenu {
         });
     }
 
-    public void Tickets(){
+    public void Tickets() throws InterruptedException {
         Actions actions = new Actions(driver);
         WebElement hover = driver.findElement(By.linkText("BILJETTER"));
         WebElement link = driver.findElement(By.cssSelector("div.subMenuCategoryListContainer > ul > li > a"));
 
-        actions.moveToElement(hover)
-                .moveToElement(link)
-                .click()
-                .build()
-                .perform();
+//        actions.moveToElement(hover)
+//                .moveToElement(link)
+//                .click()
+//                .build()
+//                .perform();
+
+        Utility utility = new Utility(driver);
+        utility.MoveToElement(hover, By.linkText("BILJETTER"));
+//        hover.click();
+        Thread.sleep(5000);
+        utility.MoveToElement(link, By.cssSelector("div.subMenuCategoryListContainer > ul > li > a"));
+        System.out.println("before clicking link");
+        link.click();
+        System.out.println("after clicking link");
 
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(new ExpectedCondition<Boolean>() {

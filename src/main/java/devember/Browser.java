@@ -31,7 +31,7 @@ public class Browser {
 
         // configure proxy as a desired capability
         DesiredCapabilities capabilities = DesiredCapabilities.edge();
-//        capabilities.setCapability(CapabilityType.PROXY, seleniumProxy);
+        capabilities.setCapability(CapabilityType.PROXY, seleniumProxy);
 
         // Blocking these servers removes most ads, but not the popover (though its images are blocked)
         proxy.blacklistRequests(".*cdn.adnxs.com.*", 400);
@@ -73,7 +73,7 @@ public class Browser {
         String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
 
         System.setProperty("webdriver.ie.driver", "C:\\WebDrivers\\IEDriverServer.exe");
-        driver = new InternetExplorerDriver(capabilities);
+        driver = new SafariDriver(capabilities);
 
 //        System.setProperty("webdriver.chrome.driver", "C:\\WebDrivers\\chromedriver.exe");
 //        driver = new ChromeDriver(capabilities);
