@@ -1,6 +1,5 @@
 package devember.pageobjects;
 
-import devember.Utility;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -32,25 +31,19 @@ public class TopMenu {
         });
     }
 
+    // This and any other functions to interact with :hover menus cannot be used in checks that should be ran in Safari
+    // The menu uses :hover CSS to display sub-menus, and it is not possible to trigger :hover from javascript
+    // Since the function could never be used in Safari, it may as well use the Actions class
     public void Tickets() throws InterruptedException {
         Actions actions = new Actions(driver);
         WebElement hover = driver.findElement(By.linkText("BILJETTER"));
         WebElement link = driver.findElement(By.cssSelector("div.subMenuCategoryListContainer > ul > li > a"));
 
-//        actions.moveToElement(hover)
-//                .moveToElement(link)
-//                .click()
-//                .build()
-//                .perform();
-
-        Utility utility = new Utility(driver);
-        utility.MoveToElement(hover, By.linkText("BILJETTER"));
-//        hover.click();
-        Thread.sleep(5000);
-        utility.MoveToElement(link, By.cssSelector("div.subMenuCategoryListContainer > ul > li > a"));
-        System.out.println("before clicking link");
-        link.click();
-        System.out.println("after clicking link");
+        actions.moveToElement(hover)
+                .moveToElement(link)
+                .click()
+                .build()
+                .perform();
 
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(new ExpectedCondition<Boolean>() {
@@ -58,6 +51,5 @@ public class TopMenu {
                 return driver.getCurrentUrl().equals("http://www.sf.se/biljetter/bokningsflodet/valj-forestallning/");
             }
         });
-        // TODO: Since I'm waiting for the URL I maybe should just write sf.bookingFlow.GoTo() that driver.get() the URL
     }
 }

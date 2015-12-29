@@ -22,7 +22,7 @@ public class SelectShow {
     public void SelectDay(String day) throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.elementToBeClickable(By.id("BookingMenuDayContainer")));
-        driver.findElement(By.id("BookingMenuDayContainer")).click();
+        driver.findElement(By.id("BookingMenuDayContainer")).findElement(By.className("customSelectBoxHead")).click();
 
         switch (day.toLowerCase()) {
             case "today":

@@ -2,6 +2,7 @@ package devember.pageobjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -17,8 +18,9 @@ public class SelectSeats {
         // TODO: Select number of tickets in a way that does not assume the default number is 2
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.elementToBeClickable(By.id("SeatingTicketsContainer")));
-        driver.findElement(By.id("SeatingTicketsContainer")).findElement(By.className("descBtn")).click();
-        Thread.sleep(1000);
+        WebElement container = driver.findElement(By.id("SeatingTicketsContainer"));
+        WebElement decreaseButton = container.findElement(By.className("descBtn"));
+        decreaseButton.click();
     }
 
     public void SelectAnyAvailableSeat() throws InterruptedException {

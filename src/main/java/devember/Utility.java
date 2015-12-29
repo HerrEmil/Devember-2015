@@ -50,7 +50,7 @@ public class Utility {
             else if (locatorType.startsWith("cssSelector")){
                 elem = "var elem = document.querySelector('" + locatorType.substring(13) + "');";
             }
-            String mouseOverScript = elem + " if(document.createEvent){var evObj = document.createEvent('MouseEvents');evObj.initEvent('mouseover', true, false);" +
+            String mouseOverScript = elem + "if(document.createEvent){var evObj = document.createEvent('MouseEvents');evObj.initEvent('mouseover', true, false);" +
                     " elem.dispatchEvent(evObj);} else if(document.createEventObject) { elem.fireEvent('onmouseover');}";
             js.executeScript(mouseOverScript);
         }
