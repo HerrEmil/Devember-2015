@@ -2,4 +2,4 @@
 
 ## Prerequisites
 
-To run checks in Internet Explorer, flash needs to be disabled to force HTML fallback.
+To run checks in Internet Explorer or Edge, flash needs to be manually disabled first.

@@ -7,6 +7,7 @@ import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -53,11 +54,9 @@ public class Browser {
         proxy.blacklistRequests(".*adtomafusion.com.*", 400);
 
         // Blocking this blocks the popover, but also breaks other things like the cinema movie filter
-//        proxy.blacklistRequests(".*fusion\\.sf\\.se\\/scriptSF\\.js\\?ads=sf", 400);
         proxy.blacklistRequests(".*ads=sf", 400);
 
-        // If using Chrome, the seat picker defaults to a flash player
-        // We disable flash to fall back to HTML seat picker
+        // Disable flash to fall back to HTML seat picker
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-bundled-ppapi-flash");
         capabilities.setCapability(ChromeOptions.CAPABILITY, options);
@@ -68,17 +67,14 @@ public class Browser {
 
         capabilities.setCapability("platform", "Windows 10");
 
-        String USERNAME = "HerrEmil";
-        String ACCESS_KEY = "PASTE ACCESS KEY HERE"; //TODO: put credentials in separate file and gitignore it
-        String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
+//        String USERNAME = "HerrEmil";
+//        String ACCESS_KEY = "PASTE ACCESS KEY HERE"; //TODO: put credentials in separate file and gitignore it
+//        String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
+//         driver = new RemoteWebDriver(new URL(URL), capabilities);
 
         System.setProperty("webdriver.ie.driver", "C:\\WebDrivers\\IEDriverServer.exe");
-        driver = new SafariDriver(capabilities);
-
-//        System.setProperty("webdriver.chrome.driver", "C:\\WebDrivers\\chromedriver.exe");
-//        driver = new ChromeDriver(capabilities);
-
-        // start the browser up
-//         driver = new RemoteWebDriver(new URL(URL), capabilities);
+        System.setProperty("webdriver.chrome.driver", "C:\\WebDrivers\\chromedriver.exe");
+        System.setProperty("webdriver.edge.driver", "C:\\WebDrivers\\MicrosoftWebDriver.exe");
+        driver = new EdgeDriver(capabilities);
     }
 }

@@ -30,6 +30,7 @@ public class SelectSeats {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("img[src=\"/ClientUI/Images/DvSeatSelector/seats/sm/PA.png\"]")));
         driver.findElement(By.cssSelector("img[src=\"/ClientUI/Images/DvSeatSelector/seats/sm/PA.png\"]")).click();
+        Thread.sleep(1000); // TODO: wait for selection to be made
     }
 
     public void ProceedToBuyOrReserve() {

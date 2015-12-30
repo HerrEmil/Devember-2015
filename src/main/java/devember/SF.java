@@ -23,7 +23,11 @@ public class SF {
 
     public void dismissCookieNotice(){
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        if(driver.findElement(By.id("CookiesAreBeingUsed")).getAttribute("style").contains("display: block;")){
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("CookiesAreBeingUsed")));
+        WebElement cookieNotice = driver.findElement(By.id("CookiesAreBeingUsed"));
+
+        // On Safari and Edge, we cannot assume that the cookie notice is displayed so we check
+        if(cookieNotice.getAttribute("style") != null && cookieNotice.getAttribute("style").contains("display: block;")){
             wait.until(ExpectedConditions.elementToBeClickable(By.id("CookiesAreBeingUsedInnerWrapper")));
             driver.findElement(By.id("CookiesAreBeingUsedInnerWrapper")).findElement(By.tagName("a")).click();
         }
