@@ -21,10 +21,11 @@ import java.net.URL;
 
 public class Browser {
     public WebDriver driver;
+    public BrowserMobProxy proxy;
 
     public Browser() throws MalformedURLException {
         // start the proxy
-        BrowserMobProxy proxy = new BrowserMobProxyServer();
+        proxy = new BrowserMobProxyServer();
         proxy.start(0);
 
         // get the Selenium proxy object
@@ -75,6 +76,6 @@ public class Browser {
         System.setProperty("webdriver.ie.driver", "C:\\WebDrivers\\IEDriverServer.exe");
         System.setProperty("webdriver.chrome.driver", "C:\\WebDrivers\\chromedriver.exe");
         System.setProperty("webdriver.edge.driver", "C:\\WebDrivers\\MicrosoftWebDriver.exe");
-        driver = new EdgeDriver(capabilities);
+        driver = new InternetExplorerDriver(capabilities);
     }
 }

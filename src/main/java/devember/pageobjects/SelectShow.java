@@ -3,6 +3,7 @@ package devember.pageobjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -17,11 +18,17 @@ public class SelectShow {
 
     public void GoTo(){
         driver.get("http://www.sf.se/biljetter/bokningsflodet/valj-forestallning/");
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(new ExpectedCondition<Boolean>() {
+            public Boolean apply(WebDriver driver) {
+                return driver.getPageSource().contains("VÄLJ FILM OCH FÖRESTÄLLNING");
+            }
+        });
     }
 
     public void SelectDay(String day) throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.elementToBeClickable(By.id("BookingMenuDayContainer")));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("BookingMenuDayContainer")));
         driver.findElement(By.id("BookingMenuDayContainer")).findElement(By.className("customSelectBoxHead")).click();
 
         switch (day.toLowerCase()) {
