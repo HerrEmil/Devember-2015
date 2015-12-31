@@ -17,7 +17,7 @@ public class SelectSeats {
     public void NumberOfAdults(String seats) throws InterruptedException {
         // TODO: Select number of tickets in a way that does not assume the default number is 2
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.elementToBeClickable(By.id("SeatingTicketsContainer")));
+        wait.until(ExpectedConditions.elementToBeClickable(By.className("descBtn")));
         WebElement container = driver.findElement(By.id("SeatingTicketsContainer"));
         WebElement decreaseButton = container.findElement(By.className("descBtn"));
         decreaseButton.click();

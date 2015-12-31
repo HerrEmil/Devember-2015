@@ -76,6 +76,6 @@ public class Browser {
         System.setProperty("webdriver.ie.driver", "C:\\WebDrivers\\IEDriverServer.exe");
         System.setProperty("webdriver.chrome.driver", "C:\\WebDrivers\\chromedriver.exe");
         System.setProperty("webdriver.edge.driver", "C:\\WebDrivers\\MicrosoftWebDriver.exe");
-        driver = new InternetExplorerDriver(capabilities);
+        driver = new EdgeDriver(capabilities);
     }
 }
